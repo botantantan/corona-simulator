@@ -1,4 +1,6 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Tubes2Stima
 {
@@ -17,13 +19,14 @@ namespace Tubes2Stima
         }
         public City(int populasi, int kenaInfeksi, string nama)
         {
-            this->populasi = populasi;
-            this->kenaInfeksi = kenaInfeksi;
-            this->nama = nama;
+            this.populasi = populasi;
+            this.kenaInfeksi = kenaInfeksi;
+            this.nama = nama;
         }
         public void set_populasi(int populasi)
         {
-            this->populasi = populasi;
+            this.populasi = populasi;
+
         }
         public int get_populasi()
         {
@@ -31,7 +34,7 @@ namespace Tubes2Stima
         }
         public void set_kenaInfeksi(int kenaInfeksi)
         {
-            this->kenaInfeksi = kenaInfeksi;
+            this.kenaInfeksi = kenaInfeksi;
         }
         public int get_kenaInfeksi()
         {
@@ -39,20 +42,31 @@ namespace Tubes2Stima
         }
         public void set_nama(string nama)
         {
-            this->nama = nama;
+            this.nama = nama;
         }
         public string get_nama()
         {
             return nama;
         }
+ 
 
 
 
         static void Main(string[] args)
         {
+            GraphCity Graf = new GraphCity();
             Console.WriteLine("Hello World!");
             City kota = new City(1000,10,"pekutan");
+            City pekutan = new City();
             Console.WriteLine(kota.get_populasi());
+            Graf.add_vertex(kota);
+            Graf.add_Edge(kota, pekutan, 10);
+            if (Graf.has_vertex(kota) && Graf.has_edge(kota,pekutan))
+            {
+                Console.WriteLine("hehe");
+                Console.WriteLine(Graf.get_prob(kota, pekutan));
+            }
+            Graf.inputFromFile();
 
         }
     }
