@@ -17,11 +17,13 @@ namespace Tubes2Stima
         }
         public City(int populasi, int kenaInfeksi, string nama)
         {
-
+            this->populasi = populasi;
+            this->kenaInfeksi = kenaInfeksi;
+            this->nama = nama;
         }
         public void set_populasi(int populasi)
         {
-
+            this->populasi = populasi;
         }
         public int get_populasi()
         {
@@ -29,7 +31,7 @@ namespace Tubes2Stima
         }
         public void set_kenaInfeksi(int kenaInfeksi)
         {
-
+            this->kenaInfeksi = kenaInfeksi;
         }
         public int get_kenaInfeksi()
         {
@@ -37,7 +39,7 @@ namespace Tubes2Stima
         }
         public void set_nama(string nama)
         {
-
+            this->nama = nama;
         }
         public string get_nama()
         {
