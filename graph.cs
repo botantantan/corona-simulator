@@ -1,4 +1,4 @@
-using Microsoft.Msagl.Drawing;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,7 @@ namespace Tubes2Stima
         int hariPertama;
         Dictionary<City, List<City>> Vertex;
         Dictionary<KeyValuePair<City, City>, float> probability;
+        Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
 
 
         public GraphCity()
@@ -40,14 +41,9 @@ namespace Tubes2Stima
         }
         public float get_prob(City Asal, City Tujuan)
         {
-            if (probability.ContainsKey(new KeyValuePair<City, City>(Asal, Tujuan)))
-            {
+
                 return probability[new KeyValuePair<City, City>(Asal, Tujuan)];
-            }
-            else
-            {
-                return 0;
-            }
+            
         }
         public Boolean has_vertex(City kota)
         {
@@ -96,7 +92,25 @@ namespace Tubes2Stima
 
             //Input Edge
         }
+        //make function penyebaran
+        public float f_penyebaran(City Asal, City Tujuan, int day)
+        {
+            return (Asal.PopInfeksi(day) * get_prob(Asal, Tujuan));
+        }
+        //make function 
+        public int first_penyebaran(City Asal, City Tujuan)
+        {
+            float hari;
+            hari = 20f / (float)(Asal.get_populasi() * get_prob(Asal, Tujuan));
+            int nextDay;
+            nextDay = (int)(Math.Ceiling(hari));
+            if(nextDay == hari)
+            {
+                ++nextDay;
+            }
+            return nextDay;
 
+        }
 
 
 
