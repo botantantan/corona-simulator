@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-
 namespace Tubes2Stima
 {
     class City
@@ -9,7 +8,6 @@ namespace Tubes2Stima
         public int populasi;
         public string nama;
         public int kenaInfeksi;
-
         public City()
         {
             populasi = 0;
@@ -17,10 +15,9 @@ namespace Tubes2Stima
             nama = "noname";
             
         }
-        public City(int populasi, int kenaInfeksi, string nama)
+        public City(int populasi,  string nama)
         {
             this.populasi = populasi;
-            this.kenaInfeksi = kenaInfeksi;
             this.nama = nama;
         }
         public void set_populasi(int populasi)
@@ -48,26 +45,20 @@ namespace Tubes2Stima
         {
             return nama;
         }
- 
-
-
-
-        static void Main(string[] args)
+        public int getTotalDay(int day)
         {
-            GraphCity Graf = new GraphCity();
-            Console.WriteLine("Hello World!");
-            City kota = new City(1000,10,"pekutan");
-            City pekutan = new City();
-            Console.WriteLine(kota.get_populasi());
-            Graf.add_vertex(kota);
-            Graf.add_Edge(kota, pekutan, 10);
-            if (Graf.has_vertex(kota) && Graf.has_edge(kota,pekutan))
-            {
-                Console.WriteLine("hehe");
-                Console.WriteLine(Graf.get_prob(kota, pekutan));
-            }
-            Graf.inputFromFile();
-
+            return (day - kenaInfeksi);
         }
+        public float PopInfeksi(int day)
+        {
+            float pop;
+            pop = (float)(get_populasi() / (1 + (get_populasi() - 1)*Math.Pow(2.71828d, -(double)(0.25*getTotalDay(day)))));
+            return pop;
+        }
+        public void reset()
+        {
+            this.kenaInfeksi = -1;
+        }
+
     }
 }
